@@ -4,6 +4,116 @@ What changed in each release of KOY IDE. Download a version from its [release pa
 the app shows the same notes in **Help → What's New**. Nightly (Beta channel) builds list their changes on their own
 release pages.
 
+## [0.21.0] - 2026-10-08
+
+### Added
+- **Orchestrator** — the first agent in Manage Agents: it's the one you talk to in chat, works out what you need, and
+  hands work to Explore, Plan, Implement, Verify and Review with "Assign to …" buttons (`/task --agent <agent> …`).
+  Its routing profile picks the chat's model.
+- **Run plan**: when the Orchestrator splits work into steps (e.g. Implement → Verify → Review), one button runs them as
+  a chain — each step starts when the one before is done and gets its results. Also `/task plan <agent>: <goal> || …`.
+- **Requirements skill (Orchestrator)**: when a request is too vague to build, the Orchestrator asks up to three short
+  questions first, with quick-answer buttons. Every task from chat then gets a **refined spec** — the files to create,
+  the functions with their parameters, the behaviour to check, the tests, the project's rules and what's out of scope —
+  ahead of your own words, so small models build the right thing. The task card shows "Spec: 3 deliverables, 2 functions …".
+- **Troubleshooter** agent and **`/troubleshoot` with no issue**: scans the open project — its test, lint, typecheck and
+  build commands, merge-conflict markers, links that lead out of the project, secret files committed to Git, very
+  large files — and, if anything is wrong, Explore locates it, the Troubleshooter finds the root cause (reproduce → read →
+  classify → fix steps), Implement fixes it and Verify checks it; the report lands in chat. No GitHub needed
+  (Manage Agents → Loops → *Scan project*). `/troubleshoot <issue>` uses the Troubleshooter too.
+- **Performance tester** agent and **`/perf [what]`**: times the project's tests, build and bench / perf scripts (three runs,
+  median), reads the slow paths and reports hotspots and fixes ordered by impact, with "VERDICT: OK / SLOW". Agents'
+  commands now report how long they took, and a project's own `bench` / `perf` scripts are on the safe list.
+- `npm run perf`: a performance test for the KOY gateway (start-up, task list and filters with 500 tasks, roster, chat,
+  parallel requests, state file), with a budget for each.
+- **Agent memory and skills**: every agent (and the Orchestrator) learns while you work — your preferences from chat
+  ("always …", "never …", "remember …"; "forget …" removes them), the project's conventions each time it opens, and per
+  agent the commands and patterns that worked and why tasks failed or were rejected. It goes into their instructions
+  automatically. Stored encrypted (AES-256-GCM, key in the OS keychain) on this device, never shown in the app or
+  returned by the API; nothing that looks like a credential is kept. Settings → Agent memory: on/off, counts, and
+  *Forget everything*.
+- **Task filter**: All / Active / Review / Done / Failed / Drafts with counts, by agent, and by text; newest first; the
+  last filter is remembered. The API takes `status` (a status or group, comma-separated), `agent` and `q`.
+- **Agent map** in Manage Agents: the Orchestrator and its agents, how many tasks each got, who hands results to whom
+  (plan and loop steps), and who is working right now. Click an agent to open it, a hand-off to open its task.
+- A tip when you plan a multi-part build with only local models: add a cloud model key (one-click buttons) or split the
+  work into steps.
+- `/run` confirmations offer **Always allow this exact command in this project**; `/run allowed` lists them and
+  `/run forget <command>` asks again. The deny-list still applies.
+- Source Control: click a changed file to see its diff against the last commit (new files show as added), with Open file.
+- Explorer and Source Control color changed files like VS Code — modified (M, amber), new / untracked (U / A, green),
+  deleted (D, red), renamed (R), conflicts (!) — and folders that contain changes.
+
+### Changed
+- Routing profiles are now **Auto** (KOY decides for you), **Performance** (the best results) and **Reliable** (the
+  lowest cost — free local models first). Older profiles keep working and show as the closest of the three.
+- Manage Agents shows each agent's introduction only (no skills or raw instructions), written for KOY — no more
+  "coder-1 / tester-2" from the AI Harness.
+- Chat replies appear smoothly: KOY waits for the first words ("… is thinking"), then the text flows in at a steady
+  pace instead of in bursts.
+- Agents that write code run the project's own tests (and lint / typecheck / build when the project has them) — also
+  outside a worktree for Verify — and a code task only finishes once the tests pass.
+- Agents get the project's conventions in their brief: ESM or CommonJS, TypeScript, the test framework and where tests
+  go, the test command and the dependencies — so they stop writing `require()` and Jest in an ESM + node:test project.
+- A test run that exits 0 but finds no tests (`# tests 0`, "No tests found") no longer counts as passing.
+- Every agent the Orchestrator assigns gets **your whole message** as its spec, so short goals no longer lose the file
+  names, functions and behaviour you asked for. A goal the model rewrites must keep the files you named.
+- On Auto, the Orchestrator plans with the Performance profile when a cloud model is usable.
+- Tasks use their agent's routing profile from Manage Agents unless you pick one (they used Balanced before).
+- Agents get instructions written for KOY's tools instead of the AI Harness templates (which mention `gh`, ticket
+  placeholders and other agents by name).
+- Tests an agent writes must import the project's code; self-contained tests don't count.
+- Approving a change whose tests failed asks for confirmation first (Source Control and `/task apply` show why).
+- `/troubleshoot` asks you to sign in to GitHub before it starts.
+- Task numbers count up without gaps (t-1, t-2 …).
+- The Tasks list and the agent map load compact task items (`GET /tasks?view=compact`): 9× less data (1.3 MB → 140 KB
+  for 500 tasks) and ~7× faster; project state is saved as compact JSON (−30 %).
+- A request that builds something and mentions tests ("… add test/x.test.ts") goes to Implement, not to the read-only
+  Verify agent, which couldn't write the tests.
+- Tasks, chat sessions and change sets are saved in KOY's data folder on this device instead of `<project>/.koy/` —
+  `git clean`, deleting `.koy/` or re-cloning no longer loses them. Older state moves over on first open.
+- Tasks may also write tests, `lib/`, `bin/`, `package.json` and `README.md`, not only the files they name. A JSON
+  file an agent writes must be valid (a broken `package.json` stopped every command).
+- Completion checks: an Implement / Fix task that changed nothing fails, Verify must end with `VERDICT: PASS` or
+  `VERDICT: FAIL` (taken from the test run when the model forgets), and Review must have read files.
+- Local models: 10 minutes per call instead of 2, two retries with backoff on timeouts and busy providers, then the next
+  suitable model. Each local model is loaded before an agent's first call, and parallel local runners are limited to
+  what fits in 70 % of the machine's RAM (and the Settings limit).
+
+### Removed
+- **Slack** — sign-in, notifications, `koy …` channel commands and the Slack app connection. Saved Slack tokens and
+  settings are deleted on the next start.
+- `/editfile` — describe the change with `/task …` instead; the agent makes it and you review it.
+- The AFLIZ loops and `/afliz` (pm, build, review, aiops, configure). `/troubleshoot` stays.
+
+### Fixed
+- Linux release builds: electron-builder 26 refused the executable name derived from the package (`@koy/desktop`); the
+  binary is now `koy-ide`, the Debian package `koy-ide`, and Linux desktops link KOY's windows to its launcher.
+- **Security:** a symlink inside a project that pointed outside it (e.g. `keys -> ~/.ssh`) let the Explorer, chat and
+  agents read or write there; every path check now follows links. The built app also has a Content-Security-Policy
+  (only KOY's own scripts run; the page talks only to the local gateway).
+- A stray rejected promise can no longer take the gateway down, and unexpected errors are logged with secrets scrubbed.
+- Leftover code from removed features (unused imports, an unused `/routing/profiles` request on every Connections view).
+- macOS updates on unsigned builds: "Restart now" failed with "Could not get code signature for running application".
+  KOY now downloads the update for your Mac, checks its SHA-512, swaps the app after it quits and reopens it
+  (signed builds keep using macOS's updater). The app must be in a folder you can write to, such as Applications.
+- **New chat** (+) switches to the new conversation right away (it used to stay on the current one until a reload).
+- Chat formatting: list items with `code` or **bold** no longer break into columns; `_italic_` and `> quote` blocks render.
+- A finished Explore / Plan / Verify / Review task no longer says it "changed no files — describe the task again".
+- Tasks created at the same time could start before their worktree existed, so their agent couldn't run commands.
+- Pressing ⌘S / Ctrl+S right after typing could skip the save, and the first keys typed into a rename / new-file box
+  that had just opened could be lost.
+
+### Security
+- **Electron 44** (from 33): fixes the published Electron advisories — sandbox and context-isolation bypasses,
+  cross-origin reads through custom protocols, use-after-free crashes, ASAR integrity bypass, and the AppleScript
+  injection in "Move to Applications" on macOS.
+- **electron-builder 26**: the bundled `electron-updater` runtime no longer leaks credentials on cross-origin redirects,
+  Linux AppImages no longer search untrusted library paths, and `tar` (archive path traversal and DoS) is patched.
+- Development tools: Vitest 4.1 (no more Tinypool prototype-pollution RCE or mock path traversal) and a patched
+  `shell-quote` for `concurrently`. `npm audit` drops from 25 findings (5 critical, 13 high) to 10 (8 moderate, 2 low,
+  none in the installed app's runtime code except Monaco's built-in DOMPurify, whose affected mode it doesn't use).
+
 ## [0.20.0] - 2026-10-08
 
 ### Added
@@ -102,6 +212,7 @@ release pages.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app.
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories.
 
+[0.21.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.21.0
 [0.20.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.20.0
 [0.19.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.19.0
 [0.18.1]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.18.1
