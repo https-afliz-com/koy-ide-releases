@@ -4,6 +4,31 @@ What changed in each release of KOY IDE. Download a version from its [release pa
 the app shows the same notes in **Help → What's New**. Nightly (Beta channel) builds list their changes on their own
 release pages.
 
+## [0.20.0] - 2026-10-08
+
+### Added
+- **Slack**: Sign in with Slack (OAuth screen in the browser), notifications to your channel, and commands — post
+  `koy <command>` in the channel (`koy run the tests`, `koy /afliz build …`) and the answer is threaded under it. Only
+  your own messages are obeyed. An optional bot token makes messages come from a KOY bot.
+- **Feedback → Google Sheet**: Help → Send feedback… (or `/feedback`) sends the text with an anonymous client id,
+  timestamp, version and OS to one feedback sheet for every install (via a Google Apps Script collector). Sign in with
+  Google to create the sheet; KOY triages new rows: bugs become a GitHub issue and a drafted task, feature requests an issue.
+  Installed builds send to the KOY IDE Feedback form (https://forms.gle/ZzwsAQcqPXp2CErSA) — anonymous, one-way, nothing
+  runs on the owner's account; another form or an Apps Script collector can be set in Settings.
+- **CI → GitHub issues**: failed jobs and warnings in CI, Release and Nightly runs open (or update) GitHub issues, and
+  close them when the job passes again.
+- **Troubleshooting agents**: `/troubleshoot <issue>` collects the issue and its CI logs, then Explore → Plan →
+  Implement → Verify fix it (with your approval) and comment the result on the issue. New `koy-troubleshoot` issues
+  are announced with the command to run; `/issues` lists them.
+
+### Security
+- Secrets are never shown: the gateway token no longer appears on the command line, DevTools are off in installed
+  builds, `/run` refuses to print credential files, environment dumps or keychain entries, and command output, Slack
+  messages and GitHub issues are scrubbed of tokens.
+
+### Changed
+- GitHub Actions use `actions/checkout@v5` and `actions/setup-node@v5` (Node 24); builds use Node 22.
+
 ## [0.19.0] - 2026-10-08
 
 ### Added
@@ -77,6 +102,7 @@ release pages.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app.
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories.
 
+[0.20.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.20.0
 [0.19.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.19.0
 [0.18.1]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.18.1
 [0.18.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.18.0
