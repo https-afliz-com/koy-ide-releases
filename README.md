@@ -31,6 +31,20 @@ space, and installs them when you click **Restart now** (or the next time you qu
 Release notes for each version are on its release page, in [CHANGELOG.md](CHANGELOG.md), and in the app under
 **Help → What's New**.
 
+## Command line and headless mode (afliz)
+
+Each release also has **`afliz-<version>.cjs`** — KOY IDE without the window, as one file for Node.js 20 or newer:
+start projects, talk to the Orchestrator, run agent tasks and plans, approve changes, troubleshoot and measure
+performance from a terminal or CI, or run `afliz serve` as a headless gateway.
+
+```bash
+node afliz-<version>.cjs help
+node afliz-<version>.cjs chat "What does this project do?" --trust
+```
+
+Agents only work in folders you trust (`--trust`), and changes are applied only when you approve them (`--approve`).
+Keep the token of an `afliz serve` gateway secret and bind it to localhost or put it behind TLS.
+
 ## License
 
 KOY IDE is © 2026 Anh Luu Services Co. Ltd., licensed under the **Business Source License 1.1** — see [LICENSE](LICENSE).
@@ -39,6 +53,6 @@ legal@afliz.com or visit https://afliz.com/legal/commercial. The same license fi
 
 ## Files in each release
 
-`latest.yml`, `latest-mac.yml`, `latest-linux.yml` and the `.blockmap` files are the update feed the app reads —
+`afliz-<version>.cjs` is the command-line / headless edition (see above). `latest.yml`, `latest-mac.yml`, `latest-linux.yml` and the `.blockmap` files are the update feed the app reads —
 you don't need to download them. GitHub also attaches “Source code (zip / tar.gz)” to every release; those archives only
 contain this repository (README, LICENSE, CHANGELOG), not KOY IDE's source code.
