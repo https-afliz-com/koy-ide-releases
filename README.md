@@ -31,19 +31,19 @@ space, and installs them when you click **Restart now** (or the next time you qu
 Release notes for each version are on its release page, in [CHANGELOG.md](CHANGELOG.md), and in the app under
 **Help → What's New**.
 
-## Command line and headless mode (afliz)
+## Command line, headless mode and SDK
 
-Each release also has **`afliz-<version>.cjs`** — KOY IDE without the window, as one file for Node.js 20 or newer:
-start projects, talk to the Orchestrator, run agent tasks and plans, approve changes, troubleshoot and measure
-performance from a terminal or CI, or run `afliz serve` as a headless gateway.
+Each release also has:
 
-```bash
-node afliz-<version>.cjs help
-node afliz-<version>.cjs chat "What does this project do?" --trust
-```
+| File | What it is |
+|---|---|
+| `afliz-<version>.cjs` | **afliz**, KOY IDE on the command line — one file for Node.js 20+: start projects, talk to the Orchestrator, run agent tasks and plans, approve changes, troubleshoot, measure performance, or `afliz serve` as a headless gateway. Guide: [CLI.md](CLI.md) |
+| `koy-sdk-<version>.tgz` | **The SDK** — `npm install <its URL>`: a typed client for the gateway (ESM + CommonJS + TypeScript) and a headless gateway for Node. Guide: [SDK.md](SDK.md) |
 
-Agents only work in folders you trust (`--trust`), and changes are applied only when you approve them (`--approve`).
-Keep the token of an `afliz serve` gateway secret and bind it to localhost or put it behind TLS.
+Running KOY IDE as a service (systemd, Docker, CI) and the security checklist: [DEPLOYMENT.md](DEPLOYMENT.md).
+
+Both are production builds: no sandbox mode, no stub model, no demo data — every answer comes from your models. Agents
+only work in folders you trust and their changes are applied only when you approve them.
 
 ## License
 
@@ -53,6 +53,6 @@ legal@afliz.com or visit https://afliz.com/legal/commercial. The same license fi
 
 ## Files in each release
 
-`afliz-<version>.cjs` is the command-line / headless edition (see above). `latest.yml`, `latest-mac.yml`, `latest-linux.yml` and the `.blockmap` files are the update feed the app reads —
+`afliz-<version>.cjs` and `koy-sdk-<version>.tgz` are the CLI and the SDK (see above). `latest.yml`, `latest-mac.yml`, `latest-linux.yml` and the `.blockmap` files are the update feed the app reads —
 you don't need to download them. GitHub also attaches “Source code (zip / tar.gz)” to every release; those archives only
 contain this repository (README, LICENSE, CHANGELOG), not KOY IDE's source code.
