@@ -8,6 +8,7 @@ release pages.
 
 ### Added
 
+- **SDK release** — each release attaches `koy-sdk-<version>.tgz`
 - **afliz — KOY IDE without the window** — a command line that runs the same Orchestrator and agents headless, or `afliz serve`…
 - **SDK** — : a typed client for the gateway and a headless gateway you start from code
 - **Start a project from Chat** — with no folder open, describe what to build
@@ -15,8 +16,7 @@ release pages.
 - **Automatic retries** — a failed task runs again as a new task that is told why the last one failed
 - **Numbered requirements** — : `/task` and chat split them into one small task per requirement, run one after another
 - **Self-check** — before a code-writing agent finishes, it checks its work against each requirement
-- **Troubleshooting closes and waives** — a fix for a GitHub issue is committed with `Fixes #n`, and KOY closes the issue itself…
-- …and 2 smaller changes
+- …and 3 smaller changes
 
 ### Changed
 
@@ -24,8 +24,13 @@ release pages.
 - Agents answer faster
 - Task worktrees link the project's `node_modules`, so an agent's `npm test` finds the project's own test tools
 
+### Security
+
+- Released builds
+
 ### Fixed
 
+- On a machine where Git has no name and email, approving an agent's change failed
 - Manage Agents
 
 ## [0.21.0] - 2026-10-08
