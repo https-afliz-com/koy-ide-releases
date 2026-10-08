@@ -28,7 +28,8 @@ space, and installs them when you click **Restart now** (or the next time you qu
 - **Stable** (default): tagged releases.
 - **Beta**: also the nightly pre-releases built from the latest code — Settings → About & updates → Update channel.
 
-Release notes for each version are on its release page and in the app under **Help → What's New**.
+Release notes for each version are on its release page, in [CHANGELOG.md](CHANGELOG.md), and in the app under
+**Help → What's New**.
 
 ## License
 
@@ -39,4 +40,5 @@ legal@afliz.com or visit https://afliz.com/legal/commercial. The same license fi
 ## Files in each release
 
 `latest.yml`, `latest-mac.yml`, `latest-linux.yml` and the `.blockmap` files are the update feed the app reads —
-you don't need to download them.
+you don't need to download them. GitHub also attaches “Source code (zip / tar.gz)” to every release; those archives only
+contain this repository (README, LICENSE, CHANGELOG), not KOY IDE's source code.
