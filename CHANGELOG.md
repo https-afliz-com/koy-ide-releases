@@ -4,6 +4,35 @@ The key changes in each release of KOY IDE. Download a version from its [release
 the app shows the full notes in **Help → What's New**. Nightly (Beta channel) builds list their changes on their own
 release pages.
 
+## [0.23.0] - 2026-10-09
+
+### Added
+
+- **Pipelines** — a project's own multi-step jobs in `koy.yaml`, run with `/pipeline <name>` or `afliz pipeline <name>`
+- **Releases go beta first** — the `release` pipeline pushes a beta, waits for it, downloads it like an update and smoke-tests…
+- **Pause, resume and cancel local model downloads** — in Connections → Local LLM
+- **Settings, redesigned** — a large window with a section list and cards that expand and collapse, each showing its current…
+- **Pull requests from KOY** — `/git pr [base]` pushes the branch and opens the pull request with your GitHub sign-in
+- **Smoke test** — of the packaged app on smoke data
+- **Jira** — connect through the Atlassian sign-in page
+- **`/git` is the whole Git command line** — log, diff, show, blame … run at once
+- …and 6 smaller changes
+
+### Changed
+
+- **Who writes which tests** — Implement writes the unit tests with the code
+- **Chat model picker** — "Auto"
+- **Push, pull and fetch without signing in to GitHub** — when KOY isn't signed in, this computer's own Git setup is used, like…
+- **Configure is part of AIOps** — ; `--agent configure` still works
+- **Five agents, clear jobs** — the Orchestrator plans
+- **Feedback goes to GitHub** — Help → Send feedback… becomes an issue in koy-ide-releases
+- **Start a new project** — has a cleaner screen
+
+### Fixed
+
+- macOS: reopening KOY no longer shows What's New again after it was seen once
+- Windows
+
 ## [0.22.0] - 2026-10-08
 
 ### Added
@@ -154,6 +183,7 @@ release pages.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories
 
+[0.23.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.23.0
 [0.22.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.22.0
 [0.21.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.21.0
 [0.20.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.20.0
