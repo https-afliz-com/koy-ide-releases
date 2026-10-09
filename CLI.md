@@ -27,11 +27,15 @@ Add a model first: an API key for a cloud provider, or a local model through Oll
 | `afliz tasks [--status s] [--agent a] [--q text]` | List tasks (status: `active`, `review`, `done`, `failed`, `drafted`) |
 | `afliz show <id>` · `afliz approve <id>` | A task's result and evidence · apply & commit its change |
 | `afliz troubleshoot [<issue> \| security]` | Scan this project / fix a GitHub issue / handle vulnerabilities |
-| `afliz perf [what]` | The Performance tester measures this project |
+| `afliz perf [what]` | Quality measures this project's performance |
+| `afliz pipelines` | The project's pipelines (koy.yaml) |
+| `afliz pipeline <name> [--only s] [--from s] [--yes]` | Run one: each step a task, stops at the first failure; `--yes` approves its commands |
+| `afliz smoke` | The project's `smoke` pipeline |
 | `afliz status` | Gateway, project, tasks, agent memory |
 | `afliz serve [--port 4317] [--host 127.0.0.1]` | A headless gateway for the SDK, CI or a remote app (see the deployment notes) |
 
-Agents: `explore`, `plan`, `implement`, `verify`, `review`, `troubleshoot`, `perf` (and any you added to the roster).
+Agents: `explore`, `implement`, `troubleshoot`, `quality`, `aiops` (and any you added to the roster). Older names still
+work: `plan`, `requirements`, `tasks` → Explore; `verify`, `review`, `perf` → Quality; `fix` → Troubleshooter; `pr`, `configure` → AIOps.
 
 ## Options
 
