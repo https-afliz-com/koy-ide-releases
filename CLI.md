@@ -31,6 +31,7 @@ Add a model first: an API key for a cloud provider, or a local model through Oll
 | `afliz pipelines` | The project's pipelines (koy.yaml) |
 | `afliz pipeline <name> [--only s] [--from s] [--yes]` | Run one: each step a task, stops at the first failure; `--yes` approves its commands |
 | `afliz smoke` | The project's `smoke` pipeline |
+| `afliz secret <NAME>` | Set a pipeline secret (e.g. `RELEASES_TOKEN`): typed without echo or piped in, stored encrypted, never printed |
 | `afliz status` | Gateway, project, tasks, agent memory |
 | `afliz serve [--port 4317] [--host 127.0.0.1]` | A headless gateway for the SDK, CI or a remote app (see the deployment notes) |
 
