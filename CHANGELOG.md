@@ -1,22 +1,25 @@
 # KOY IDE changelog
 
-The key changes in each release of KOY IDE. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
-the app shows the full notes in **Help → What's New**. Nightly (Beta channel) builds list their changes on their own
-release pages.
+What changed in the app in each release of KOY IDE. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
+the app shows the full notes in **Help → What's New**.
+
+## [0.25.0] - 2026-10-09
+
+### Changed
+
+- **What's New shows only this version's changes** — after an update: only the versions since the one you had; earlier versions are one click away
+- **The KOY CLI works through the open app** — with KOY IDE running, `afliz` uses it — its tasks, pipelines and AIOps watches show in the app live and use its GitHub sign-in (`--headless` runs separately)
 
 ## [0.24.0] - 2026-10-09
 
 ### Added
 
-- **Release branches** — `develop` (local) → `staging` (beta) → `main` (stable)
 - **AIOps watches GitHub** — after every push the release pipeline makes, AIOps follows that commit's GitHub Actions as a task until they finish; `/aiops` shows the status, `/aiops…
 - **Explore owns the PRD and TRD** — `docs/PRD.md` (product) and `docs/TRD.md` (technical) replace `docs/REQUIREMENTS.md`; every approved change updates the TRD's change log and tech stack
 - **Tooltips** — icon buttons and short labels with the explanation on hover (ⓘ), so panels and Settings take less space
-- **Smoke test reports** — every check timed, a screenshot of each screen, and a report kept as the commit's artifact; the CLI shows each pipeline step's output live
 
 ### Changed
 
-- **Release notes list every change of the version** — one clean line each (no "…and N smaller changes", no cut-off entries), on the release pages and the public changelog
 - **No reinstall of the same build** — an app running a beta doesn't download the stable release made from that same commit
 
 ## [0.23.0] - 2026-10-09
@@ -24,11 +27,9 @@ release pages.
 ### Added
 
 - **Pipelines** — a project's own multi-step jobs in `koy.yaml`, run with `/pipeline <name>` or `afliz pipeline <name>`; every step is a task with its log, it stops at the…
-- **Releases go beta first** — the `release` pipeline pushes a beta, waits for it, downloads it like an update and smoke-tests it, and only then promotes the same commit to production;…
 - **Pause, resume and cancel local model downloads** — in Connections → Local LLM
 - **Settings, redesigned** — a large window with a section list and cards that expand and collapse (Appearance, This computer, Agents & memory, Notifications, GitHub & issues, Mail,…
 - **Pull requests from KOY** — `/git pr [base]` (or Source Control → PR, or the button after AIOps writes a PR) pushes the branch and opens the pull request with your GitHub sign-in —…
-- **Smoke test** — of the packaged app on smoke data; betas can be built from any branch on demand
 - **Jira** — connect through the Atlassian sign-in page; tickets (your JQL) become draft tasks, and statuses stay in step both ways — starting / finishing a task moves…
 - **`/git` is the whole Git command line** — log, diff, show, blame … run at once; commit, push, pull, fetch, checkout, rename have safe flows; merge, rebase, reset, stash, add, tag … ask first
 - **Manage Agents without a folder** — shows and edits the default roster and routing profiles that projects start from
@@ -36,7 +37,6 @@ release pages.
 - **Quality writes test cases for the requirements** — with stub data in `test/stub-data/` that stays out of Git
 - **Every agent run is a task** — the Orchestrator's planning replies and project / security scans appear in Tasks with their activity log
 - **File changes in chat and Tasks** — "Change <file>" (or `/task change <path> <what>`) returns a diff in chat to apply; a task's Changes tab can add a file change, edit a staged file, and apply…
-- **Issue sync** — koy-ide-releases issues are mirrored into afliz-ide and closed the same way when resolved there
 
 ### Changed
 
@@ -71,7 +71,6 @@ release pages.
 
 ### Changed
 
-- Release pages and the public changelog show each version's key points; the app keeps the full notes in What's New
 - Agents answer faster: read-only agents get a smaller answer budget, every agent is told to act rather than deliberate, and detailed `/task` descriptions…
 - Task worktrees link the project's `node_modules`, so an agent's `npm test` finds the project's own test tools
 
@@ -93,7 +92,6 @@ release pages.
 - **Requirements skill (Orchestrator)** — when a request is too vague to build, the Orchestrator asks up to three short questions first, with quick-answer buttons
 - **Troubleshooter** — agent and **`/troubleshoot` with no issue**: scans the open project — its test, lint, typecheck and build commands, merge-conflict markers, links that lead…
 - **Performance tester** — agent and **`/perf [what]`**: times the project's tests, build and bench / perf scripts (three runs, median), reads the slow paths and reports hotspots and…
-- `npm run perf`: a performance test for the KOY gateway (start-up, task list and filters with 500 tasks, roster, chat, parallel requests, state file), with a…
 - **Agent memory and skills** — every agent (and the Orchestrator) learns while you work — your preferences from chat ("always …", "never …", "remember …"; "forget …" removes them), the…
 - **Task filter** — All / Active / Review / Done / Failed / Drafts with counts, by agent, and by text; newest first; the last filter is remembered
 - **Agent map** — in Manage Agents: the Orchestrator and its agents, how many tasks each got, who hands results to whom (plan and loop steps), and who is working right now
@@ -133,10 +131,8 @@ release pages.
 
 ### Fixed
 
-- Linux release builds: electron-builder 26 refused the executable name derived from the package (`@koy/desktop`); the binary is now `koy-ide`, the Debian…
 - **Security** — a symlink inside a project that pointed outside it (e.g. `keys -> ~/.ssh`) let the Explorer, chat and agents read or write there; every path check now…
 - A stray rejected promise can no longer take the gateway down, and unexpected errors are logged with secrets scrubbed
-- Leftover code from removed features (unused imports, an unused `/routing/profiles` request on every Connections view)
 - macOS updates on unsigned builds: "Restart now" failed with "Could not get code signature for running application"
 - **New chat** — (+) switches to the new conversation right away (it used to stay on the current one until a reload)
 - Chat formatting: list items with `code` or **bold** no longer break into columns; `_italic_` and `> quote` blocks render
@@ -148,7 +144,6 @@ release pages.
 
 - **Electron 44** — from 33: fixes the published Electron advisories — sandbox and context-isolation bypasses, cross-origin reads through custom protocols, use-after-free…
 - **electron-builder 26** — the bundled `electron-updater` runtime no longer leaks credentials on cross-origin redirects, Linux AppImages no longer search untrusted library paths, and…
-- Development tools: Vitest 4.1 (no more Tinypool prototype-pollution RCE or mock path traversal) and a patched `shell-quote` for `concurrently`
 
 ## [0.20.0] - 2026-10-08
 
@@ -221,6 +216,7 @@ release pages.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories
 
+[0.25.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.25.0
 [0.24.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.24.0
 [0.23.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.23.0
 [0.22.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.22.0
