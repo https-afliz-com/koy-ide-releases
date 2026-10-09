@@ -91,7 +91,7 @@ local model, run Ollama next to the gateway and set the provider endpoint (`PATC
 ```yaml
 - run: curl -sSLo afliz.cjs https://github.com/https-afliz-com/koy-ide-releases/releases/download/v0.21.0/afliz-0.21.0.cjs
 - run: node afliz.cjs troubleshoot --wait --trust --data "$RUNNER_TEMP/koy"      # scan: tests, lint, typecheck, build, risks
-- run: node afliz.cjs perf --wait --trust --data "$RUNNER_TEMP/koy"              # the Performance tester's report
+- run: node afliz.cjs perf --wait --trust --data "$RUNNER_TEMP/koy"              # Quality's performance report
 ```
 
 Agents never push or merge: changes are committed in the job's checkout only when you pass `--approve`, so review them
