@@ -24,10 +24,18 @@ Add a model first: an API key for a cloud provider, or a local model through Oll
 | `afliz new "<what to build>" [--dir <parent>]` | Start a new project (folder + Git + README) and send the request to the Orchestrator |
 | `afliz chat "<message>" [--do "<action>"]` | Talk to the Orchestrator in this project; `--do "Run plan"` runs one of its actions |
 | `afliz task "<goal>" [--agent <key>]` | One agent task; numbered requirements (1. 2. 3.) become a plan, in the best order |
-| `afliz tasks [--status s] [--agent a] [--q text]` | List tasks (status: `active`, `review`, `done`, `failed`, `drafted`) |
+| `afliz tasks [--status s] [--agent a] [--q text]` | List tasks (status: `active`, `review`, `done`, `failed`, `drafted`, `archived`, `trash`) |
+| `afliz tasks --everywhere` | Every recent project's tasks — no project needed |
+| `afliz archive <id>` · `afliz trash <id>` · `afliz restore <id>` · `afliz empty-trash` | Archive a finished task · move it to the Trash · bring it back · delete the Trash for good |
 | `afliz show <id>` · `afliz approve <id>` | A task's result and evidence · apply & commit its change |
 | `afliz troubleshoot [<issue> \| security]` | Scan this project / fix a GitHub issue / handle vulnerabilities |
 | `afliz perf [what]` | Quality measures this project's performance |
+| `afliz improve [--auto-merge off] [--wait]` | KOY's product team: backlog, proposals with mockups, low-risk fixes (KOY Pro) |
+| `afliz scan [--no-security] [--no-perf]` | Scan the whole project — tests, lint, typecheck, build; npm audit (+ Dependabot); timings and perf scripts. Exit 1 on problems |
+| `afliz report` · `afliz skill <agent> "<text>"` | The team report (strengths, weaknesses, suggested skills) · give an agent a skill |
+| `afliz monitor [on\|off\|check\|fix <id>\|dismiss <id>] [--health-url u] [--log-file f]` | AIOps › Monitor and its incidents (KOY Pro) |
+| `afliz account [sign-in\|sign-out\|refresh\|plans]` | Your account and plan |
+| `afliz tokens [create <name>\|revoke <id>]` | Access tokens (KOY Pro): named bearer tokens for the CLI, the SDK and CI |
 | `afliz pipelines` | The project's pipelines (koy.yaml) |
 | `afliz pipeline <name> [--only s] [--from s] [--yes]` | Run one: each step a task, stops at the first failure; `--yes` approves its commands |
 | `afliz smoke` | The project's `smoke` pipeline |
@@ -87,3 +95,21 @@ The release file is a **production build**: it has no sandbox mode, no stub mode
 comes from your models. (`--sandbox` exists only in the development build inside the source repository, for tests.)
 
 afliz is part of KOY IDE and licensed under the Business Source License 1.1.
+
+## Secrets: `afliz secret set <slot>`
+
+KOY never asks for a secret in its screens or in chat. API keys, tokens and client secrets are entered in a terminal —
+`afliz secret set <slot>` asks for the value without showing it (or reads it from a pipe) — and kept in the operating
+system's keychain (macOS Keychain, Windows Credential Manager, Linux Secret Service), not in KOY's files. In the app, each
+"Set in terminal" button opens KOY's terminal with the command running (`afliz` is on the PATH there).
+
+| Slot | What |
+|---|---|
+| `provider:<id>` | A model provider's API key — e.g. `provider:deepseek`; KOY tests the connection right away |
+| `github:token` | A GitHub personal access token (signs in) |
+| `github:oauth-secret` | Your GitHub OAuth App's client secret |
+| `jira:client-secret` | Your Atlassian OAuth app's client secret |
+| `app:<app>:<field>` | A connected app's secret field (then Connect in KOY) |
+| `pipeline:<project>:<name>` | A secret a pipeline's steps get as an environment variable |
+
+`afliz secret delete <slot>` removes one. In chat, `/secret <slot>` opens the terminal the same way.
