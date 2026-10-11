@@ -64,11 +64,21 @@ const tasks = await koy.waitForTasks(ids, {
 | `approve(id, { approveFailing })` · `cancel(id)` | Apply & commit a task's change (refused when its tests failed, unless `approveFailing`) · cancel |
 | `troubleshoot()` · `troubleshoot(42)` · `troubleshoot('security')` | Scan the project · fix GitHub issue #42 · handle vulnerabilities → a loop run |
 | `waitForLoop(id, { approve })` | Wait for a troubleshoot run |
+| `improve({ autoMerge, github })` · `scan({ security, perf })` | KOY's product team (KOY Pro) · the full scan (checks, security, performance) |
+| `shelved('archived' \| 'trash')` · `archive(id)` · `trash(id)` · `restore(id)` · `emptyTrash()` · `housekeeping()` | Archive and Trash |
+| `tasksEverywhere()` | Every recent project's tasks (no project needed) |
+| `report()` · `addSkill(agent, text)` | The team report · give an agent a skill |
+| `savePipeline(name, { description, steps })` · `deletePipeline(name)` · `pipelineSuggestions()` · `schedulePipeline(name, cron)` | Pipelines in the project's koy.yaml |
+| `monitor()` · `setMonitor(config)` · `checkApp()` · `fixIncident(id)` · `dismissIncident(id)` | AIOps › Monitor (KOY Pro) |
+| `account()` · `signIn()` · `signOut()` · `refreshPlan()` · `plans()` | Your account and plan |
+| `accessTokens()` · `createAccessToken(name)` · `revokeAccessToken(id)` | Access tokens (KOY Pro) |
+| `terminals()` | The app's open terminals |
 | `memory()` | How much the agents have learned (counts only) |
 | `settings(patch?)` | Read or change settings |
 | `request(method, path, body?)` | Any other API call (`/api/v1/docs` on the gateway lists them) |
 
-Errors are `KoyError` with the gateway's `code` (`TRUST_REQUIRED`, `TESTS_NOT_PASSING`, `TIMEOUT` …) and `status`.
+Errors are `KoyError` with the gateway's `code` (`TRUST_REQUIRED`, `TESTS_NOT_PASSING`, `PLAN_REQUIRED`, `TIMEOUT` …) and `status`.
+An access token (Account → Access tokens, KOY Pro) works as the `token` for any gateway on that computer.
 
 ## Security
 
