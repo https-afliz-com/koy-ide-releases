@@ -3,6 +3,22 @@
 What changed in the app in each release of KOY IDE. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
 the app shows the full notes in **Help → What's New**.
 
+## [1.1.0] - 2026-10-11
+
+### Added
+
+- **Monitor: commit low-risk fixes** — (Manage Agents → AIOps → Monitor, or `autoMerge` in koy.yaml)
+
+### Fixed
+
+- **Incidents close once they are fixed** — When the fix's change is committed and Quality's re-check passes, the incident is resolved and shows the fix commit
+- The Incident Manager's triage report and post-mortem (`docs/incidents/`) go in by themselves, so they no longer hold up the fix
+- **Implement can't finish without the files its goal names** — Before anything is staged, KOY checks that each file named in the goal was written (or already exists) and that something changed
+- The Monitor and the Incident Manager are always on AIOps' team (and the Orchestrator's) when a project's koy.yaml turns the Monitor on, even before the…
+- The agent runner's notes to the model about repeated actions no longer show up in task results, activity, chat or incident titles
+- **Windows terminals** — `afliz secret set` no longer waits forever in PowerShell
+- Creating a task is quicker on a busy machine: KOY looks up the base branch and commit at the same time
+
 ## [1.0.0] - 2026-10-11
 
 ### Added
@@ -268,6 +284,7 @@ the app shows the full notes in **Help → What's New**.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories
 
+[1.1.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v1.1.0
 [1.0.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v1.0.0
 [0.25.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.25.0
 [0.24.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.24.0
