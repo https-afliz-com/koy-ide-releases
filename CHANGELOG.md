@@ -3,6 +3,58 @@
 What changed in the app in each release of KOY IDE. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
 the app shows the full notes in **Help → What's New**.
 
+## [1.0.0] - 2026-10-11
+
+### Added
+
+- **Sub-agents** — specialists under each lead agent
+- **Self-improvement (`/improve`, `afliz improve`)** — the Product Owner keeps a ranked backlog (`docs/BACKLOG.md`), and the Business Analyst proposes the top features as PRD stories with HTML mockups for you to…
+- **Monitor and incidents** — AIOps: watches KOY, your running app (health URL, log file) and CI
+- **Team report** — `/report`, `afliz report`, the Orchestrator's card: each agent's strengths and weaknesses, with suggested skills you add in one click
+- **Accounts — your first month free** — sign in with Google, GitHub or email and every feature is unlocked for your first month: every sub-agent, any number of project folders and access tokens…
+- **Welcome tour** — for newcomers: the agent team, how work flows, connecting a model, the optional account, and the choice about sharing anonymous usage (Help → Welcome tour…
+- **Tasks in several project folders** — Pro: Tasks → Add folder
+- **Tasks without a folder open** — every recent project's tasks, and "New task" with a project picker
+- **Archive and Trash** — finished tasks are archived after 14 days and moved to the Trash 30 days later (Settings → Tasks)
+- **Terminals in the app** — as many as you like at the bottom of the main area (the terminal button in the top bar)
+- **Pipelines per project** — create, edit and delete them on the AIOps card, with suggestions from the project's own scripts
+- **File System connector** — agents create, read, update and delete files in your home folder
+- **`afliz scan`** — scans the whole project — tests, lint, typecheck and build; npm audit (and Dependabot); timings and perf scripts
+- New CLI commands and SDK calls for all of the above (`afliz monitor`, `account`, `tokens`, `archive`, `trash`, `restore`, `tasks --everywhere`, `skill` …)
+- **Scheduled pipelines** — Manage Agents → AIOps runs a project's pipelines by themselves — twice a month, weekly, daily or any cron schedule — while the project is open in KOY
+- **Pipeline secrets** — tokens a pipeline's steps need are typed once, stored encrypted, never shown again, and given only to the steps that ask for them (scrubbed from their output)
+- **Secrets only in the terminal** — API keys, tokens and client secrets are never typed into KOY
+- **The Orchestrator looks after every agent** — when a task fails, it works out why and the root cause (reading the project and, with the Browser connector, the web) and tells the agent another way to try…
+- **Quality reads the error logs** — errors and warnings from your app's and project's log files, failed tasks, open incidents and CI — it finds each root cause, fixes it and adds a test that…
+- **Windows and Linux for Intel and ARM** — installers for x64 (Intel/AMD) and arm64 on Windows and Linux, as on macOS
+
+### Changed
+
+- **Closing a folder doesn't stop its agents** — Explorer lets go of it at once; tasks that are still running finish, and they keep showing in Tasks
+- **Approving a task's change finishes the task** — one approval ("Approve & commit"), and the next step of a plan starts
+- **Chat plans always have a button** — a plan the model writes as a list, or a one-step plan, gets "Assign to …" or "Run plan"; answering the Orchestrator's questions no longer brings more…
+- **Settings → Privacy** — has one switch: share anonymous usage data (never code or prompts)
+- **Manage Agents** — the agent map stays on top, with sub-agents under the agent they report to
+- **Connections are in Settings** — (Settings → Connections)
+- **Chat** — follows the routing profiles (no model picker) and collapses to a thin bar on the right
+- **New task** — is one page, with the less common options one click away
+- Line icons instead of emoji throughout
+
+### Fixed
+
+- Tooltips near the window's edge are no longer cut off
+- A task whose description mentions "private" or "local" code no longer runs on the small local model
+- After signing in or paying in the browser, KOY updates by itself (and says so); signing out and in again asks which account to use
+- Manage Agents no longer crashes on an account without a plan's details; Settings → Connections' "+" works again
+
+### Security
+
+- Access tokens (CI, scripts) can't open a terminal or set secrets in KOY; the gateway checks its token in constant time
+
+### Removed
+
+- **The Beta update channel** — KOY IDE updates to stable releases only; an app on a beta moves to the next release
+
 ## [0.25.0] - 2026-10-09
 
 ### Changed
@@ -216,6 +268,7 @@ the app shows the full notes in **Help → What's New**.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories
 
+[1.0.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v1.0.0
 [0.25.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.25.0
 [0.24.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.24.0
 [0.23.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.23.0
