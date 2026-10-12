@@ -1,19 +1,26 @@
-# afliz — KOY IDE on the command line
+# afliz — KOY IDE 2 on the command line
 
-`afliz` runs KOY IDE without its window: the same Orchestrator and agents, Workspace Trust, approvals and checks — from a
+`afliz` runs KOY IDE 2 without its window: the same Orchestrator and agents, Workspace Trust, approvals and checks — from a
 terminal, a script or CI. By default it starts its own gateway for each command; with `--url` it uses a running one
 (the desktop app's, `afliz serve`, or a server).
 
 ## Install
 
 Each release has `afliz-<version>.cjs` on the [releases page](https://github.com/https-afliz-com/koy-ide-releases/releases)
-— one file, nothing to install, Node.js 20 or newer.
+— one file, Node.js 20 or newer — and `koy-gateway-<version>-<os>-<arch>`, the gateway afliz starts when it runs on
+its own. Put both in one folder (or `koy-gateway` on your `PATH`, or set `KOY_GATEWAY_BIN`).
 
 ```bash
-curl -sSLo afliz.cjs https://github.com/https-afliz-com/koy-ide-releases/releases/download/v0.22.0/afliz-0.22.0.cjs
+curl -sSLo afliz.cjs https://github.com/https-afliz-com/koy-ide-releases/releases/download/v1.1.0/afliz-1.1.0.cjs
+curl -sSLo koy-gateway https://github.com/https-afliz-com/koy-ide-releases/releases/download/v1.1.0/koy-gateway-1.1.0-macos-arm64
+chmod +x koy-gateway
 node afliz.cjs --version
 alias afliz="node $PWD/afliz.cjs"      # optional
 ```
+
+Inside KOY IDE 2's terminals `afliz` is already there — no Node.js needed for the commands the app asks you to run
+(`afliz secret set …`) and the everyday ones (`status`, `chat`, `task`, `tasks`, `show`, `approve`, `scan`,
+`pipelines`, `pipeline`).
 
 Add a model first: an API key for a cloud provider, or a local model through Ollama (see *Models* below).
 
@@ -94,7 +101,7 @@ encrypted in the data folder and never shown again.
 The release file is a **production build**: it has no sandbox mode, no stub model and no demo data — every answer
 comes from your models. (`--sandbox` exists only in the development build inside the source repository, for tests.)
 
-afliz is part of KOY IDE and licensed under the Business Source License 1.1.
+afliz is part of KOY IDE 2 and licensed under the Business Source License 1.1.
 
 ## Secrets: `afliz secret set <slot>`
 
