@@ -1,8 +1,8 @@
-# KOY IDE SDK (`@koy/sdk`)
+# KOY IDE 2 SDK (`@koy/sdk`)
 
-Drive KOY IDE from code: open a project, talk to the **Orchestrator**, run agent tasks and plans, review and approve
+Drive KOY IDE 2 from code: open a project, talk to the **Orchestrator**, run agent tasks and plans, review and approve
 their changes, troubleshoot, measure performance. The SDK talks to a KOY gateway — the desktop app's, one started with
-`afliz serve`, a server you deployed, or one it starts in your own process (`startHeadless`). Every call goes through
+`afliz serve`, a server you deployed, or one it starts for you (`startHeadless` — the `koy-gateway` program). Every call goes through
 the same gateway the app uses, so Workspace Trust, the tool gateway, approvals and the agents' checks all apply.
 
 ## Install
@@ -25,7 +25,9 @@ import { KoyClient } from '@koy/sdk';
 const koy = new KoyClient({ url: 'http://127.0.0.1:4317', token: process.env.KOY_TOKEN! });
 ```
 
-or start one in this process (production — your models and keys, stored encrypted in `dataDir`):
+or start one (production — your models and keys, stored encrypted in `dataDir`). `startHeadless()` runs the
+`koy-gateway` program attached to each release for your OS: put it on `PATH`, next to the SDK, or point
+`KOY_GATEWAY_BIN` (or the `bin` option) at it:
 
 ```ts
 import { startHeadless } from '@koy/sdk/headless';
@@ -87,4 +89,4 @@ An access token (Account → Access tokens, KOY Pro) works as the `token` for an
   where that's what you want (e.g. a throwaway CI checkout).
 - Keys you add are stored encrypted in the gateway's data folder and are never returned by the API.
 
-The SDK is part of KOY IDE and licensed under the Business Source License 1.1 (see LICENSE).
+The SDK is part of KOY IDE 2 and licensed under the Business Source License 1.1 (see LICENSE).
