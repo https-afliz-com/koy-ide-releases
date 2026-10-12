@@ -1,6 +1,6 @@
-# Deploying KOY IDE headless (afliz)
+# Deploying KOY IDE 2 headless (afliz)
 
-KOY IDE's gateway — the Orchestrator, the agents, Workspace Trust, the tool gateway, approvals, agent memory — also runs
+KOY IDE 2's gateway — the Orchestrator, the agents, Workspace Trust, the tool gateway, approvals, agent memory — also runs
 **without the desktop window**. Use it on a build server, in CI, on a team machine, or behind your own tools through the
 SDK. The same gateway serves the desktop app, so everything behaves the same.
 
@@ -20,7 +20,8 @@ cd /path/to/project
 node afliz-0.21.0.cjs status --trust
 ```
 
-Without `--url`, every command starts its own gateway in-process and stops it when it's done. State — tasks, chat,
+Without `--url`, every command starts its own gateway (the `koy-gateway` program — on `PATH`, next to afliz, or
+`KOY_GATEWAY_BIN`) and stops it when it's done. State — tasks, chat,
 change sets, agent memory, encrypted keys — lives in the **data folder** (`~/.koy/headless`, or `--data <dir>` /
 `KOY_DATA_DIR`). Keep it on persistent, private storage; back it up like any other secret store.
 
@@ -45,7 +46,7 @@ KOY_TOKEN="$(openssl rand -hex 24)" node afliz-0.21.0.cjs serve --port 4317 --ho
 ```ini
 # /etc/systemd/system/koy.service
 [Unit]
-Description=KOY IDE gateway (headless)
+Description=KOY IDE 2 gateway (headless)
 After=network-online.target
 
 [Service]
