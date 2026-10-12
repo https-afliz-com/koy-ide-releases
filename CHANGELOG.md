@@ -1,7 +1,26 @@
-# KOY IDE changelog
+# KOY IDE 2 changelog
 
-What changed in the app in each release of KOY IDE. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
+What changed in the app in each release of KOY IDE 2. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
 the app shows the full notes in **Help → What's New**.
+
+## [2.0.0] - 2026-10-12
+
+### Removed
+
+- **The Electron app is no longer supported** — KOY IDE 1.x (Electron) gets no further updates or fixes: 1.1.0 is its last version
+
+### Changed
+
+- **The app is now called KOY IDE 2** — every 2.x version — so it is never mistaken for KOY IDE 1.x: a separate app (KOY IDE 2.app, its own bundle id) with its own data folder
+- **A smaller, faster KOY IDE 2** — the desktop app is now built on Tauri, using your system's web view instead of a bundled browser, and its engine (the gateway behind every screen, the CLI…
+- **`afliz` in KOY's terminals works without Node.js** — the commands the app asks you to run (`afliz secret set …`) and the everyday ones (`status`, `chat`, `task`, `tasks`, `show`, `approve`, `scan`,…
+- **The agent team works as one** — Each agent has one job and its own files (docs/AGENTS.md)
+
+### Fixed
+
+- A task created without file limits may write its unit tests (code and tests, as from chat), not just `src/`
+- AIOps' pull request always has its title, summary, testing, risks and rollback; long ones are no longer cut off
+- `afliz secret set` built into the app takes the first line when there is no pseudo-terminal (Windows PowerShell), as the Node CLI does since 1.1.0
 
 ## [1.1.0] - 2026-10-11
 
@@ -284,6 +303,7 @@ the app shows the full notes in **Help → What's New**.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories
 
+[2.0.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.0.0
 [1.1.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v1.1.0
 [1.0.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v1.0.0
 [0.25.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v0.25.0
