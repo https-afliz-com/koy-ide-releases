@@ -3,6 +3,22 @@
 What changed in the app in each release of KOY IDE 2. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
 the app shows the full notes in **Help → What's New**.
 
+## [2.2.0] - 2026-10-13
+
+### Fixed
+
+- **You can move the window on a Mac again** — Drag it by the top bar (anywhere that isn't a button or the search box); a double click zooms it, as with any Mac window
+- **`afliz` works through the open KOY IDE 2 again** — it looked for the running app only in KOY IDE 1.x's folders, so since 2.0 every command started a separate headless gateway with its own data — tasks,…
+- **`afliz` finds the installed KOY IDE 2's gateway** — when the app isn't open, so a copy of the CLI outside this repository (e.g. in another project's `tools/`) no longer needs `koy-gateway` on the PATH or…
+- **One KOY IDE 2 at a time** — opening it again brings the open window forward instead of starting a second copy — which ran its own gateway on the same data folder and took over the link…
+- **`koy-gateway --version` and `--help` answer and stop** — instead of starting a gateway on your data folder; an unknown option is refused
+
+## [2.1.1] - 2026-10-13
+
+### Fixed
+
+- **KOY IDE 2 for Windows updates itself** — like the Mac app: it checks at launch and every 4 hours, downloads a new version in the background and installs it on **Restart now** or the next quit…
+
 ## [2.1.0] - 2026-10-13
 
 ### Added
@@ -21,6 +37,13 @@ the app shows the full notes in **Help → What's New**.
 
 - **The Apple silicon (arm64) Mac app opens again** — Without a Developer ID it shipped with only the compiler's signature, which macOS rejects on Apple silicon, so the Intel build was the one that ran (through…
 - **The local model suggestion checks what you already have** — If a coding model that fits your computer is already installed, setup no longer ticks a download (a bigger one is offered as optional); an installed model…
+- **Windows: approving a change no longer fails with a conflict that isn't there** — Git for Windows keeps files with Windows line endings; KOY now compares and merges the text itself, so a change made against an older version merges, a…
+- **Windows: keys and secrets can be typed in KOY's terminal** — `afliz secret set` waited for ever after Enter, so API keys (Connections → Model keys → *Add & set key in terminal*) couldn't be added
+- **Windows: Claude Code installed with npm answers** — Every call with instructions failed to start (`claude.cmd` can't take them on its command line); they now go with the prompt
+- **Windows: tasks run with the KOY CLI show in the app** — The app and the CLI now find a project's data under the same folder path and home folder
+- **Windows: koy.yaml pipelines run in Git Bash** — when Git for Windows is installed, so the same steps (`a && b`, `$SECRET`) work on every OS — KOY IDE's own pipelines included
+- **An MCP server that stops while starting shows its exit code** — with its error output
+- Messages and hints point to **Connections → App connectors** (they still said *Apps*)
 
 ## [2.0.0] - 2026-10-12
 
@@ -322,6 +345,8 @@ the app shows the full notes in **Help → What's New**.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories
 
+[2.2.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.2.0
+[2.1.1]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.1.1
 [2.1.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.1.0
 [2.0.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.0.0
 [1.1.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v1.1.0
