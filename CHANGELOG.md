@@ -3,6 +3,25 @@
 What changed in the app in each release of KOY IDE 2. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
 the app shows the full notes in **Help → What's New**.
 
+## [2.1.0] - 2026-10-13
+
+### Added
+
+- **Focus mode** — View → Focus Mode, Cmd/Ctrl+Shift+F: the app turns monochrome and shows only your work — the editor, chat and the search bar (Cmd/Ctrl+K opens files)
+- **Agent tasks scale with your computer's load** — (Settings → This computer, on by default)
+- **MCP servers** — Settings → MCP servers: give agents extra tools from any Model Context Protocol server — one KOY starts on this computer (a command such as `npx …`) or a…
+- **Use your Claude plan through Claude Code** — Connections → Model keys → Your Claude plan: agents and chat can run on Claude Pro, Max, Team or Enterprise through the `claude` CLI, with no API key
+
+### Changed
+
+- **The Orchestrator runs on your Claude plan while Claude Code is ready** — when Claude Code is installed and signed in on a paid plan, KOY adds it by itself (no click, no key) and chat uses it — Opus first, then Sonnet, then Haiku,…
+- **Manage Agents** — no longer shows the AI Harness version and sync date under the library
+
+### Fixed
+
+- **The Apple silicon (arm64) Mac app opens again** — Without a Developer ID it shipped with only the compiler's signature, which macOS rejects on Apple silicon, so the Intel build was the one that ran (through…
+- **The local model suggestion checks what you already have** — If a coding model that fits your computer is already installed, setup no longer ticks a download (a bigger one is offered as optional); an installed model…
+
 ## [2.0.0] - 2026-10-12
 
 ### Removed
@@ -303,6 +322,7 @@ the app shows the full notes in **Help → What's New**.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories
 
+[2.1.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.1.0
 [2.0.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.0.0
 [1.1.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v1.1.0
 [1.0.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v1.0.0
