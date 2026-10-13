@@ -20,8 +20,8 @@ cd /path/to/project
 node afliz-0.21.0.cjs status --trust
 ```
 
-Without `--url`, every command starts its own gateway (the `koy-gateway` program — on `PATH`, next to afliz, or
-`KOY_GATEWAY_BIN`) and stops it when it's done. State — tasks, chat,
+Without `--url`, every command works through the open KOY IDE 2 app, or else starts its own gateway (the `koy-gateway`
+program — `KOY_GATEWAY_BIN`, next to afliz, the installed KOY IDE 2's copy, or on `PATH`) and stops it when it's done. State — tasks, chat,
 change sets, agent memory, encrypted keys — lives in the **data folder** (`~/.koy/headless`, or `--data <dir>` /
 `KOY_DATA_DIR`). Keep it on persistent, private storage; back it up like any other secret store.
 
