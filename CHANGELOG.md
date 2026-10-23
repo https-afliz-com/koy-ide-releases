@@ -3,6 +3,21 @@
 What changed in the app in each release of KOY IDE 2. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
 the app shows the full notes in **Help → What's New**.
 
+## [2.5.0] - 2026-10-22
+
+### Added
+
+- **Afliz's shared models (Afliz employees only)** — signed in with an @afliz.com account, KOY picks up the model servers Afliz switches on in the account portal (for example GLM 4.7 Flash on Afliz's own…
+- **19 languages** — Settings → Appearance → Language: English, Tiếng Việt, 日本語, 한국어, 简体中文, ไทย, Bahasa Indonesia, Bahasa Melayu, Français, Deutsch, Español, Português,…
+
+### Fixed
+
+- **A task paused because the computer was busy could wait forever** — on a computer that stays busy (for example a Mac with little free memory), a task paused at the moment another one finished was never picked up again — the…
+
+### Security
+
+- **KOY ID sign-ins must include the second step** — KOY now refuses a KOY ID ID token that doesn't say two-step verification was done (`acr` = `mfa`), when you sign in and when it renews the sign-in, and asks…
+
 ## [2.4.0] - 2026-10-17
 
 ### Added
@@ -12,6 +27,7 @@ the app shows the full notes in **Help → What's New**.
 
 ### Changed
 
+- **Sign in with KOY ID** — KOY IDE now signs in with KOY ID, Afliz's own account sign-in (id.afliz.com, with two-step verification), in your browser — no more Google / GitHub /…
 - **App connector icons** — Connections → Apps: each connector shows its own icon instead of the same plug for all
 - **"Share usage events"** — the privacy switch (Settings → Privacy), the welcome tour and the "Help improve KOY?" prompt now say exactly what is shared — usage events such as which…
 
@@ -372,6 +388,7 @@ the app shows the full notes in **Help → What's New**.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories
 
+[2.5.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.5.0
 [2.4.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.4.0
 [2.3.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.3.0
 [2.2.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.2.0
