@@ -3,6 +3,20 @@
 What changed in the app in each release of KOY IDE 2. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
 the app shows the full notes in **Help → What's New**.
 
+## [2.6.0] - 2026-11-02
+
+### Changed
+
+- **After signing in to KOY ID, the browser shows Afliz's "You're signed in" page and KOY comes to the front** — the browser tab no longer stays on a 127.0.0.1 page — it goes on to afliz.com/account/signed-in.html — and the KOY IDE window is shown, restored and focused
+- **Send feedback goes to the KOY team, privately — and they thank you** — Help → Send feedback… and `/feedback` now need a KOY ID sign-in and go straight to the KOY team instead of becoming a public GitHub issue
+- **`docs: { review: true }` in koy.yaml** — the PRD, TRD and mockups the agents write wait for your review like code, for teams that approve every requirement
+
+## [2.5.1] - 2026-10-23
+
+### Fixed
+
+- **Sign in to KOY ID without two-step verification** — two-step verification (2FA) is optional for KOY ID accounts — you turn it on or off in the Afliz portal (Profile & sign-in)
+
 ## [2.5.0] - 2026-10-22
 
 ### Added
@@ -388,6 +402,8 @@ the app shows the full notes in **Help → What's New**.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories
 
+[2.6.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.6.0
+[2.5.1]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.5.1
 [2.5.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.5.0
 [2.4.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.4.0
 [2.3.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.3.0
