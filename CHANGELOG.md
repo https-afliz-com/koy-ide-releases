@@ -3,6 +3,12 @@
 What changed in the app in each release of KOY IDE 2. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
 the app shows the full notes in **Help → What's New**.
 
+## [2.6.1] - 2026-11-03
+
+### Changed
+
+- **Maintenance release** — no changes you'd notice
+
 ## [2.6.0] - 2026-11-02
 
 ### Changed
@@ -402,6 +408,7 @@ the app shows the full notes in **Help → What's New**.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories
 
+[2.6.1]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.6.1
 [2.6.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.6.0
 [2.5.1]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.5.1
 [2.5.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.5.0
