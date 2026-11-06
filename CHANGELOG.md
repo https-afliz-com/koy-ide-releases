@@ -27,7 +27,7 @@ the app shows the full notes in **Help → What's New**.
 
 ### Added
 
-- **Afliz's shared models (Afliz employees only)** — signed in with an @afliz.com account, KOY picks up the model servers Afliz switches on in the account portal (for example GLM 4.7 Flash on Afliz's own…
+- **Afliz's shared models (Afliz employees only)** — signed in with an @afliz.com account, KOY picks up the shared models Afliz switches on in the account portal, through Afliz AI Router: it adds it as an…
 - **19 languages** — Settings → Appearance → Language: English, Tiếng Việt, 日本語, 한국어, 简体中文, ไทย, Bahasa Indonesia, Bahasa Melayu, Français, Deutsch, Español, Português,…
 
 ### Fixed
@@ -55,7 +55,7 @@ the app shows the full notes in **Help → What's New**.
 
 ### Changed
 
-- **Signing in and upgrading happen on afliz.com** — (afliz.com/account/) instead of koyide-6137b.web.app, which is now only for development builds
+- **Signing in and upgrading happen on afliz.com** — (afliz.com/account/) instead of the earlier address, which is now only for development builds
 - **No emoji** — chat replies, notifications and the CLI use plain marks (✓ ✖ ⚠ ▶) instead of colour emoji, and agents, routing profiles, harness templates and apps carry…
 
 ### Fixed
@@ -119,7 +119,7 @@ the app shows the full notes in **Help → What's New**.
 - **The app is now called KOY IDE 2** — every 2.x version — so it is never mistaken for KOY IDE 1.x: a separate app (KOY IDE 2.app, its own bundle id) with its own data folder
 - **A smaller, faster KOY IDE 2** — the desktop app is now built on Tauri, using your system's web view instead of a bundled browser, and its engine (the gateway behind every screen, the CLI…
 - **`afliz` in KOY's terminals works without Node.js** — the commands the app asks you to run (`afliz secret set …`) and the everyday ones (`status`, `chat`, `task`, `tasks`, `show`, `approve`, `scan`,…
-- **The agent team works as one** — Each agent has one job and its own files (docs/AGENTS.md)
+- **The agent team works as one** — Each agent has one job and its own files
 
 ### Fixed
 
@@ -380,7 +380,7 @@ the app shows the full notes in **Help → What's New**.
 
 ### Added
 
-- Code signing and notarization setup: hardened runtime and entitlements for macOS, Windows Authenticode through environment variables, `npm run…
+- Code signing and notarization setup: hardened runtime and entitlements for macOS, Windows Authenticode through environment variables, and `npm run…
 - Release automation: pushing a version tag builds, signs and uploads macOS (Apple silicon and Intel), Windows and Linux installers plus the update feed to…
 
 ### Fixed
