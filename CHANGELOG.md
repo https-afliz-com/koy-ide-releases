@@ -3,6 +3,53 @@
 What changed in the app in each release of KOY IDE 2. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
 the app shows the full notes in **Help → What's New**.
 
+## [2.7.0] - 2026-11-08
+
+### Added
+
+- **Robotics (KOY Pro)** — a new **Robotics** view in the side rail
+
+### Changed
+
+- **Afliz AI Router is the default AI** — once you sign in, chat and agents use Afliz AI Router with nothing to set up, within your plan's allowance
+- **When Afliz AI Router's allowance is used up** — the chat shows Afliz AI Router's own message and when it's back, with the choice to upgrade or use your own AI provider
+- Afliz AI Router's models appear under their Afliz names
+- **Afliz AI Router is turned on client by client** — Connections now shows it as Active or Inactive
+
+### Added
+
+- **KOY AI Router** — the new default, Connections → Model keys → Model choice: before every call KOY picks the best of your models for the task: your own keys, your Claude plan,…
+- **Agent and chat status says what's really happening** — in three colours: green "KOY AI Router · <model>" when it runs; amber with a clock when a model is resting or near its limit and KOY AI Router already uses…
+- **Groq as a model provider** — add a Groq key in Connections → Model keys to use GPT-OSS 120B and 20B, with the task budget counting their published prices
+- **Getting a Gemini or Groq key** — Connections → Model keys now says where to get a free key and how
+
+### Changed
+
+- **Current Gemini models** — Google Gemini now offers Gemini 3.8 Flash, 3.5 Flash-Lite and 4 Argon
+
+### Fixed
+
+- Saying "commit", "push" or "create a PR" in chat now shows exactly what will happen and does it on your OK, including work waiting for review and a new…
+- A plan for a new web project no longer trips over its own goals: a step isn't refused `public/`, `migrations/`, `db/` or `.gitignore`, a sentence's full…
+- A task that stopped at the step limit is retried instead of being treated as a failure a retry can't help
+- Tests count even when the plan was made before the project had any: a step can no longer finish saying they pass while they fail
+- When a plan's step fails for good or you cancel it, the steps waiting on it are cancelled with the reason, instead of staying queued forever
+- The Orchestrator's advice on a failed task now looks at what that task left in its worktree, so it no longer reports the task's files as missing
+- Agents that build and test have room to finish: 40 steps and a larger token budget, with output kept when a command hits its time limit
+- A new project installs its packages by itself: KOY writes the lockfile and runs `npm ci` before a check needs them
+- Security: agents' commands no longer get the tokens and keys in KOY's environment, and KOY no longer says tasks run in a container or that network access is…
+- Quality is offered the project's e2e suite, can wire it into the scripts in `package.json` and a Playwright config, and `koy.yaml` (`limits.commandMinutes`,…
+- **CI that never ran is no longer called a failure** — when GitHub doesn't start a job (a billing block, for one), or a project has no workflows, AIOps says "CI didn't run" and why
+- **A health incident stays open until the app is back** — a committed fix no longer marks it resolved while the app still fails its health check
+- `/troubleshoot security` can now fix a real project: a task with no installed packages gets them from the lockfile, the scan names the version that is…
+- Locate, and other steps told to change nothing, can no longer leave a change to approve
+- An agent that reaches the same "waive" conclusion twice stops, instead of using up its budget on a third attempt
+- When `npm audit` can't run, the security scan says so instead of reporting no vulnerabilities
+
+### Security
+
+- **Safer code editor and data checks** — updated DOMPurify, used by the code editor, to 3.4.17 and Zod to 4.6.7 to close known vulnerabilities
+
 ## [2.6.1] - 2026-11-03
 
 ### Changed
@@ -408,6 +455,7 @@ the app shows the full notes in **Help → What's New**.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories
 
+[2.7.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.7.0
 [2.6.1]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.6.1
 [2.6.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.6.0
 [2.5.1]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.5.1
