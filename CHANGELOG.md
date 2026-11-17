@@ -3,14 +3,38 @@
 What changed in the app in each release of KOY IDE 2. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
 the app shows the full notes in **Help → What's New**.
 
+## [2.8.0] - 2026-11-16
+
+### Changed
+
+- **Long chats are summarized with "Choose models myself" too** — once a conversation reaches 60% of the context window of the model the chat uses, the older turns are folded into a running summary and the latest turns…
+- **Connections › Model keys no longer lists every model under KOY AI Router** — with what's left of each: the router picks, and there was nothing to do with the list
+- **A seat from your organization shows as KOY Pro** — Account and the top bar called it "Enterprise", the licence's internal name
+
+### Fixed
+
+- **Afliz AI Router from your organization shows as Active** — with a seat from an organization that gives its people Afliz AI Router, the card in Connections said "Inactive — Not turned on for your account", because it…
+- **No "Upgrade to Pro" at the Afliz AI Router limit when your organization already gives you KOY Pro**
+
+### Added
+
+- **A timer on every chat reply** — while a reply is on its way, a counter next to "Thinking…" (and under the text as it streams) shows how long it has been working, so you can tell the model…
+- **Files in chat** — drop files anywhere on the chat, paste them (a screenshot from the clipboard, copied files) or pick them with the new paperclip
+
+### Changed
+
+- **Afliz AI Router chooses its own model** — KOY AI Router still picks among the models on your computer and your own keys, and treats Afliz AI Router as one choice, **Afliz AI Router (auto)**
+
 ## [2.7.0] - 2026-11-08
 
 ### Added
 
+- **Security audit** — `/audit` (or **Quick audit** / **Standard audit** on CyberSecurity's card) audits the whole project, or the paths you name
 - **Robotics (KOY Pro)** — a new **Robotics** view in the side rail
 
 ### Changed
 
+- **CyberSecurity reviews are stricter and clearer** — every finding now says who could do what, which protection it gets past and what happens as a result
 - **Afliz AI Router is the default AI** — once you sign in, chat and agents use Afliz AI Router with nothing to set up, within your plan's allowance
 - **When Afliz AI Router's allowance is used up** — the chat shows Afliz AI Router's own message and when it's back, with the choice to upgrade or use your own AI provider
 - Afliz AI Router's models appear under their Afliz names
@@ -455,6 +479,7 @@ the app shows the full notes in **Help → What's New**.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories
 
+[2.8.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.8.0
 [2.7.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.7.0
 [2.6.1]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.6.1
 [2.6.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.6.0
