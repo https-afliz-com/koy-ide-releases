@@ -3,6 +3,14 @@
 What changed in the app in each release of KOY IDE 2. Download a version from its [release page](https://github.com/https-afliz-com/koy-ide-releases/releases);
 the app shows the full notes in **Help → What's New**.
 
+## [2.8.1] - 2026-11-18
+
+### Added
+
+- **A message Afliz AI Router can't answer today is kept, and tried again at reset** — when your daily Afliz AI Router allowance is used up, the message you sent stays in the conversation marked **Not answered yet**, instead of an error reply
+- **An agent's task stopped by the Afliz AI Router allowance is paused, not failed** — what it did so far is kept, and the task shows the same **Try again at reset**, which resumes it from there
+- **A note at 80% and at 90% of today's Afliz AI Router allowance** — next to the message box: how much is left and when it resets
+
 ## [2.8.0] - 2026-11-16
 
 ### Changed
@@ -479,6 +487,7 @@ the app shows the full notes in **Help → What's New**.
 - Chat sessions in Auto routing, `/` commands and `@` file mentions; mail through the OS mail app
 - GitHub sign-in in the default browser, organization repositories, clone and connect existing repositories
 
+[2.8.1]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.8.1
 [2.8.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.8.0
 [2.7.0]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.7.0
 [2.6.1]: https://github.com/https-afliz-com/koy-ide-releases/releases/tag/v2.6.1
